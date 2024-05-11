@@ -9,6 +9,7 @@ type TStore = {
   getTickets: () => Promise<void>;
   getTicketByTechnicianId: (technicianId: number) => Promise<void>;
   resolveTicket: (id: number, technicianId?: number) => Promise<void>;
+  deleteTicket: (id: number, technicianId?: number) => Promise<void>;
 };
 
 export const useTicketsStore = create<TStore>((set, get) => ({
@@ -54,6 +55,14 @@ export const useTicketsStore = create<TStore>((set, get) => ({
       technicianId
         ? await get().getTicketByTechnicianId(technicianId)
         : await get().getTickets();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  deleteTicket: async (id) => {
+    try {
+      await ticketsApi.deleteTicket(id);
+      await get().getTickets();
     } catch (error) {
       console.log(error);
     }

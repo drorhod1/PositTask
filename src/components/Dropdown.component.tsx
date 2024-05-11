@@ -1,6 +1,7 @@
 import { screens, uiText } from "@/constants/stringRes";
 import { useTechnicianStore } from "@/store/technician.store";
 import { ITechnician } from "@/types/technician.type";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
@@ -8,19 +9,20 @@ type Props = {
 };
 
 export default function Dropdown(props: Props) {
-  const { selectedTech, setSelectedTech } = useTechnicianStore();
+  const [technicianId, setTechnicianId] = useState(-1);
+  const { setSelectedTech } = useTechnicianStore();
   const navigate = useNavigate();
-  console.log(selectedTech);
   const moveToNextPage = () => {
-    selectedTech && selectedTech > 0
-      ? navigate(`${screens.technicians}/${selectedTech}`)
+    setSelectedTech(technicianId);
+    technicianId > 0
+      ? navigate(`${screens.technicians}/${technicianId}`)
       : navigate(`${screens.admin}`);
   };
   return (
     <div>
       <select
         onChange={(event) => {
-          setSelectedTech(+event.target.value);
+          setTechnicianId(+event.target.value);
         }}
         name=""
         id=""

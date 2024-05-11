@@ -36,14 +36,15 @@ class TicketsApi {
     return response;
   }
   public async solveTicket(ticketId: number): Promise<AxiosResponse<ITicket>> {
-    console.log(ticketId);
     const response = await axiosClient.patch(
       `${ticketEnpoints.updateTicket}/${ticketId}`
     );
     return response;
   }
-  public async deleteTicket(): Promise<AxiosResponse<ITicket[]>> {
-    const response = await axiosClient.delete(`${ticketEnpoints.deleteTicket}`);
+  public async deleteTicket(ticketId: number): Promise<AxiosResponse<ITicket>> {
+    const response = await axiosClient.delete(
+      `${ticketEnpoints.deleteTicket}/${ticketId}`
+    );
     return response;
   }
 }

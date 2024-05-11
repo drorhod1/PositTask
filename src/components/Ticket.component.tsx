@@ -1,11 +1,14 @@
 import { ITicket } from "@/types/tickets.type";
 import DoneButton from "./DoneButton.component";
+import DeleteButton from "./DeleteButton.component";
+import { useTechnicianStore } from "@/store/technician.store";
 
 type Props = {
   ticket: ITicket;
 };
 
 export default function Ticket(props: Props) {
+  const { selectedTech } = useTechnicianStore();
   return (
     <div>
       <li>
@@ -20,6 +23,9 @@ export default function Ticket(props: Props) {
         </div>
       </li>
       <DoneButton taskId={props.ticket.id} />
+      {selectedTech && selectedTech < 0 && (
+        <DeleteButton taskId={props.ticket.id} />
+      )}
     </div>
   );
 }

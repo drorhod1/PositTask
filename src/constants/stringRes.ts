@@ -1,6 +1,9 @@
 export const technicianEndpoints = {
   getAllTechnicians: "/user",
 };
+export const customerEndpoints = {
+  getAllCustomers: "/customers",
+};
 export const warehouseEndpoints = {
   getAllWarehouses: "/warehouses",
 };
