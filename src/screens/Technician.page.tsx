@@ -19,10 +19,13 @@ export default function Technician() {
   console.log(currentTechnician);
   return (
     <div className="">
-      {currentTechnician &&
-        currentTechnicianTickets && (
-          <CurrentTechnician currentTechnician={currentTechnician} />
-        ) && <Tasks tickets={currentTechnicianTickets} />}
+      {currentTechnician && currentTechnicianTickets?.length ? (
+        <CurrentTechnician currentTechnician={currentTechnician} /> && (
+          <Tasks tickets={currentTechnicianTickets} />
+        )
+      ) : (
+        <p>לא נמצאו משימות להיום</p>
+      )}
     </div>
   );
 }
