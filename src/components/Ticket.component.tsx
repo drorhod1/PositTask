@@ -10,7 +10,7 @@ type Props = {
 export default function Ticket(props: Props) {
   const { selectedTech } = useTechnicianStore();
   return (
-    <div>
+    <div className="tikets-div">
       <li>
         <div>
           <p>Date: {props.ticket.date}</p>

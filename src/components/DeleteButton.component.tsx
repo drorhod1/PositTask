@@ -1,3 +1,4 @@
+import { uiText } from "@/constants/stringRes";
 import { useTicketsStore } from "@/store/ticket.store";
 
 type Props = {
@@ -10,8 +11,8 @@ export default function DeleteButton(props: Props) {
     deleteTicket(props.taskId);
   };
   return (
-    <div>
-      <button onClick={onHandleClick}>Delete</button>
+    <div className="button-div">
+      <button onClick={onHandleClick}>{uiText.deleteTicket}</button>
     </div>
   );
 }

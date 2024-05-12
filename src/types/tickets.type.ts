@@ -9,3 +9,11 @@ export interface ITicket {
   assigned_technician_id?: number;
   date: string;
 }
+
+export interface ITicketCreate {
+  description: string;
+  title: string;
+  customer_id: string;
+  hardware_type: string;
+  date: string;
+}

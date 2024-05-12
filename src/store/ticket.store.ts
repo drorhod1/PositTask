@@ -1,20 +1,25 @@
 import ticketsApi from "@/api/tickets.api";
-import { ITicket } from "@/types/tickets.type";
+import { ITechnician } from "@/types/technician.type";
+import { ITicket, ITicketCreate } from "@/types/tickets.type";
 import { create } from "zustand";
 
 type TStore = {
   tickets?: ITicket[];
   currentTechnicianTickets?: ITicket[];
+  employeeOfTheMonth?: ITechnician;
   setTickets: (tickets: ITicket[]) => void;
+  getEmployeeOfTheMonth: () => Promise<void>;
   getTickets: () => Promise<void>;
   getTicketByTechnicianId: (technicianId: number) => Promise<void>;
   resolveTicket: (id: number, technicianId?: number) => Promise<void>;
-  deleteTicket: (id: number, technicianId?: number) => Promise<void>;
+  deleteTicket: (id: number) => Promise<void>;
+  createTicket: (ticketInfo: ITicketCreate) => Promise<void>;
 };
 
 export const useTicketsStore = create<TStore>((set, get) => ({
   tickets: undefined,
   currentTechnicianTickets: undefined,
+  employeeOfTheMonth: undefined,
   setTickets: (tickets: ITicket[]) => {
     set((state) => {
       return {
@@ -30,6 +35,19 @@ export const useTicketsStore = create<TStore>((set, get) => ({
         return {
           ...state,
           tickets: response.data,
+        };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getEmployeeOfTheMonth: async () => {
+    try {
+      const response = await ticketsApi.getEmployeeOfTheMonth();
+      set((state) => {
+        return {
+          ...state,
+          employeeOfTheMonth: response.data,
         };
       });
     } catch (error) {
@@ -62,6 +80,14 @@ export const useTicketsStore = create<TStore>((set, get) => ({
   deleteTicket: async (id) => {
     try {
       await ticketsApi.deleteTicket(id);
+      await get().getTickets();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createTicket: async (ticketInfo: ITicketCreate) => {
+    try {
+      await ticketsApi.createTicket(ticketInfo);
       await get().getTickets();
     } catch (error) {
       console.log(error);

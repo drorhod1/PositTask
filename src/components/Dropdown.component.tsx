@@ -19,7 +19,8 @@ export default function Dropdown(props: Props) {
       : navigate(`${screens.admin}`);
   };
   return (
-    <div>
+    <div className="home-buttons-div">
+      <button onClick={moveToNextPage}>{uiText.startButton}</button>
       <select
         onChange={(event) => {
           setTechnicianId(+event.target.value);
@@ -32,8 +33,6 @@ export default function Dropdown(props: Props) {
           return <option value={technician.id}>{technician.name}</option>;
         })}
       </select>
-      <br />
-      <button onClick={moveToNextPage}>{uiText.startButton}</button>
     </div>
   );
 }

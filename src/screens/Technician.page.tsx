@@ -18,7 +18,7 @@ export default function Technician() {
 
   console.log(currentTechnician);
   return (
-    <div>
+    <div className="">
       {currentTechnician &&
         currentTechnicianTickets && (
           <CurrentTechnician currentTechnician={currentTechnician} />

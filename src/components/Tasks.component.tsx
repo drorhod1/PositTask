@@ -7,7 +7,7 @@ type Props = {
 
 export default function Tasks(props: Props) {
   return (
-    <div>
+    <div className="scrollable-div">
       <ul>
         {props.tickets &&
           props.tickets.map((ticket) => {

@@ -18,7 +18,7 @@ export default function DoneButton(props: Props) {
     selectedTech && getTicketByTechnicianId(selectedTech);
   };
   return (
-    <div>
+    <div className="button-div">
       <button
         onClick={() => {
           resolveTask();
