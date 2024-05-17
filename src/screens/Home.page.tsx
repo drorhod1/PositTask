@@ -15,10 +15,10 @@ const Home = () => {
   return (
     <div>
       {employeeOfTheMonth && (
-        <h4 className="congratsText">
+        <h3 className="congratsText">
           {uiText.congratulationsTo}
           {employeeOfTheMonth.name} {uiText.BeingEmpOfMonth}
-        </h4>
+        </h3>
       )}
       {technicians ? (
         <Dropdown technicians={technicians} />
