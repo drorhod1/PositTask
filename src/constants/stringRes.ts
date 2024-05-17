@@ -23,9 +23,13 @@ export const screens = {
 
 export const uiText = {
   startButton: "התחל",
+  couldNotLoadTech: "לא ניתן היה לטעון את רשימת הטכנאים",
   admin: "מנהל",
+  createTicketError: "מצטערים הייתה בעיה ביצירת הכרטיס",
+  adminTicketError:
+    "מצטערים הייתה בעיה בטעינת הכרטיסים אנא בדוק מול צוות התמיכה",
   doneBtn: "בוצע",
-  homeBtn: "לדף הבית",
+  homeBtn: "\u2302",
   TechnicianApplication: "אפליקציית טכנאים",
   createTicket: "צור קריאה",
   deleteTicket: "מחק קריאה",
@@ -37,4 +41,5 @@ export const uiText = {
   customerId: "מזהה לקוח",
   hardwareType: "כרטיס תקול",
   date: "תאריך",
+  createAnother: "צור כרטיס נוסף",
 };

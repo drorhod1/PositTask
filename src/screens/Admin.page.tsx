@@ -17,7 +17,11 @@ export default function Admin() {
           <button>{uiText.createTicket}</button>
         </div>
       </Link>
-      {tickets && <Tasks tickets={tickets} />}
+      {tickets ? (
+        <Tasks tickets={tickets} />
+      ) : (
+        <p className="error">{uiText.adminTicketError}</p>
+      )}
     </div>
   );
 }

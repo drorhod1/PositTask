@@ -7,9 +7,12 @@ type TStore = {
   tickets?: ITicket[];
   currentTechnicianTickets?: ITicket[];
   employeeOfTheMonth?: ITechnician;
+  ticketCreateError: boolean;
+  created?: boolean;
   setTickets: (tickets: ITicket[]) => void;
   getEmployeeOfTheMonth: () => Promise<void>;
   getTickets: () => Promise<void>;
+  resetCreated: () => Promise<void>;
   getTicketByTechnicianId: (technicianId: number) => Promise<void>;
   resolveTicket: (id: number, technicianId?: number) => Promise<void>;
   deleteTicket: (id: number) => Promise<void>;
@@ -20,6 +23,8 @@ export const useTicketsStore = create<TStore>((set, get) => ({
   tickets: undefined,
   currentTechnicianTickets: undefined,
   employeeOfTheMonth: undefined,
+  ticketCreateError: false,
+  created: false,
   setTickets: (tickets: ITicket[]) => {
     set((state) => {
       return {
@@ -85,12 +90,45 @@ export const useTicketsStore = create<TStore>((set, get) => ({
       console.log(error);
     }
   },
-  createTicket: async (ticketInfo: ITicketCreate) => {
+  resetCreated: async () => {
     try {
-      await ticketsApi.createTicket(ticketInfo);
-      await get().getTickets();
+      set((state) => {
+        return {
+          ...state,
+          created: false,
+        };
+      });
     } catch (error) {
       console.log(error);
+    }
+  },
+  createTicket: async (ticketInfo: ITicketCreate) => {
+    try {
+      const res = await ticketsApi.createTicket(ticketInfo);
+      if (res.status != 200) {
+        set((state) => {
+          return {
+            ...state,
+            ticketCreateError: true,
+          };
+        });
+      } else {
+        set((state) => {
+          return {
+            ...state,
+            created: true,
+          };
+        });
+        await get().getTickets();
+      }
+    } catch (error) {
+      console.log(error);
+      set((state) => {
+        return {
+          ...state,
+          ticketCreateError: true,
+        };
+      });
     }
   },
 }));

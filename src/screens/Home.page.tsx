@@ -20,7 +20,11 @@ const Home = () => {
           {employeeOfTheMonth.name} {uiText.BeingEmpOfMonth}
         </h4>
       )}
-      {technicians && <Dropdown technicians={technicians} />}
+      {technicians ? (
+        <Dropdown technicians={technicians} />
+      ) : (
+        <p className="error">{uiText.couldNotLoadTech}</p>
+      )}
     </div>
   );
 };
