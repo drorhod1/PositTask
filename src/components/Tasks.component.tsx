@@ -5,15 +5,11 @@ type Props = {
   tickets: ITicket[];
 };
 
-export default function Tasks(props: Props) {
+export default function Tasks({ tickets }: Props) {
   return (
     <div className="scrollable-div">
-      <ul>
-        {props.tickets &&
-          props.tickets.map((ticket) => {
-            return <Ticket ticket={ticket} />;
-          })}
-      </ul>
+      {tickets &&
+        tickets.map((ticket) => <Ticket key={ticket.id} ticket={ticket} />)}
     </div>
   );
 }

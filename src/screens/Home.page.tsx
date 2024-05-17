@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div>
       {employeeOfTheMonth && (
-        <h4>
+        <h4 className="congratsText">
           {uiText.congratulationsTo}
           {employeeOfTheMonth.name} {uiText.BeingEmpOfMonth}
         </h4>
