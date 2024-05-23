@@ -29,7 +29,8 @@ header {
   color: #ecf0f1;
 }
 .title {
-  min-width: 50%;
+  min-width: 90%;
+  text-align: center;
 }
 
 .header-container h1 {
